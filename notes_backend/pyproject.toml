@@ -1,0 +1,33 @@
+[tool.pylint.main]
+# Only lint our source directory
+recursive = true
+py-version = "3.12"
+
+[tool.pylint.messages_control]
+# Disable some messages that are too strict or not aligned with FastAPI style choices
+disable = [
+  "line-too-long",            # Managed by black/formatting; allow long URL lines and docstrings
+  "missing-module-docstring", # FastAPI apps may keep module-level comments minimal
+  "missing-class-docstring",  # Pydantic models are self-descriptive via Fields
+  "missing-function-docstring",
+  "import-error",             # Avoids false positives when linting outside of venv
+  "invalid-name",             # Allow non-constant style for module-level counters in demo
+  "global-statement",         # Acceptable in simple in-memory demo
+  "import-outside-toplevel",  # Accept small local imports when needed
+  "unspecified-encoding",     # Non-issue for generate script in repo encoding context
+]
+
+[tool.pylint.design]
+max-args = 10
+max-locals = 30
+max-branches = 20
+max-statements = 100
+
+[tool.pylint.basic]
+good-names = [
+  "app",
+  "q",
+  "n",
+  "t",
+  "id",
+]
